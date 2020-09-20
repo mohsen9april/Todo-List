@@ -13,15 +13,23 @@ struct ContentView: View {
     @State private var showingAddTodoView: Bool = false
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    @FetchRequest(entity: Todo.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Todo.name, ascending: true)]) var todos: FetchedResults<Todo>
+    
     //MARK:- Body
     var body: some View {
         
         NavigationView{
-            List(0..<5) { item in
-                Text("New Item")
+            List {
+                ForEach(self.todos, id: \.self) { todo in
+                    HStack{
+                        Text(todo.name ?? "Unknown")
+                        Spacer()
+                        Text(todo.priority ?? "Unknown")
+                    }
+                }.onDelete(perform: deleteTodo)
             }
             .navigationBarTitle("Todo", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: EditButton(),trailing: Button(action: {
                 //Action
                 self.showingAddTodoView.toggle()
             }, label: {
@@ -33,11 +41,29 @@ struct ContentView: View {
             }
         }
     }
+    
+    //MARK:- FUNCTIONS
+    
+    private func deleteTodo(at offset : IndexSet) {
+        for index in offset {
+            let todo = todos[index]
+            managedObjectContext.delete(todo)
+            
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
+  
 }
 
 //MARK:- Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let contxt = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return ContentView()
+        .environment(\.managedObjectContext, contxt)
     }
 }

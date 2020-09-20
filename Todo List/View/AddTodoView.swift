@@ -16,7 +16,7 @@ struct AddTodoView: View {
     @State private var priority: String = "Normal"
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) private var managedObjectContext
-    
+
     @State private var errorShowing: Bool = false
     @State private var errorTitle: String = ""
     @State private var errorMessage: String = ""
