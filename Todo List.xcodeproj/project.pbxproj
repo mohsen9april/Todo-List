@@ -15,6 +15,7 @@
 		ED2B06E82514A81500AE0611 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED2B06E72514A81500AE0611 /* Preview Assets.xcassets */; };
 		ED2B06EB2514A81500AE0611 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED2B06E92514A81500AE0611 /* LaunchScreen.storyboard */; };
 		ED2B06F42514A83F00AE0611 /* AddTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2B06F32514A83F00AE0611 /* AddTodoView.swift */; };
+		EDA99D44251BC89D00C35A93 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA99D43251BC89D00C35A93 /* EmptyListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		ED2B06EA2514A81500AE0611 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED2B06EC2514A81500AE0611 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED2B06F32514A83F00AE0611 /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
+		EDA99D43251BC89D00C35A93 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				ED2B06E22514A81100AE0611 /* ContentView.swift */,
 				ED2B06F32514A83F00AE0611 /* AddTodoView.swift */,
+				EDA99D43251BC89D00C35A93 /* EmptyListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			files = (
 				ED2B06DC2514A81100AE0611 /* AppDelegate.swift in Sources */,
 				ED2B06E12514A81100AE0611 /* Todo_List.xcdatamodeld in Sources */,
+				EDA99D44251BC89D00C35A93 /* EmptyListView.swift in Sources */,
 				ED2B06E32514A81100AE0611 /* ContentView.swift in Sources */,
 				ED2B06DE2514A81100AE0611 /* SceneDelegate.swift in Sources */,
 				ED2B06F42514A83F00AE0611 /* AddTodoView.swift in Sources */,

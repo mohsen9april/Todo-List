@@ -19,26 +19,33 @@ struct ContentView: View {
     var body: some View {
         
         NavigationView{
-            List {
-                ForEach(self.todos, id: \.self) { todo in
-                    HStack{
-                        Text(todo.name ?? "Unknown")
-                        Spacer()
-                        Text(todo.priority ?? "Unknown")
-                    }
-                }.onDelete(perform: deleteTodo)
-            }
-            .navigationBarTitle("Todo", displayMode: .inline)
-            .navigationBarItems(leading: EditButton(),trailing: Button(action: {
-                //Action
-                self.showingAddTodoView.toggle()
-            }, label: {
-                Image(systemName: "plus")
-            }))
+            ZStack {
+                List {
+                    ForEach(self.todos, id: \.self) { todo in
+                        HStack{
+                            Text(todo.name ?? "Unknown")
+                            Spacer()
+                            Text(todo.priority ?? "Unknown")
+                        }
+                    }.onDelete(perform: deleteTodo)
+                }
+                .navigationBarTitle("Todo", displayMode: .inline)
+                .navigationBarItems(leading: EditButton(),trailing: Button(action: {
+                    //Action
+                    self.showingAddTodoView.toggle()
+                }, label: {
+                    Image(systemName: "plus")
+                }))
+                    .sheet(isPresented: $showingAddTodoView) {
+                        AddTodoView().environment(\.managedObjectContext, self.managedObjectContext)
+                }
                 
-                .sheet(isPresented: $showingAddTodoView) {
-                    AddTodoView().environment(\.managedObjectContext, self.managedObjectContext)
-            }
+                if todos.count == 0 {
+                    EmptyListView()
+                }
+                
+            } // End ZStack
+
         }
     }
     
@@ -56,7 +63,7 @@ struct ContentView: View {
             }
         }
     }
-  
+    
 }
 
 //MARK:- Preview
@@ -64,6 +71,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let contxt = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return ContentView()
-        .environment(\.managedObjectContext, contxt)
+            .environment(\.managedObjectContext, contxt)
     }
 }
