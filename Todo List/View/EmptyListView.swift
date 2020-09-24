@@ -12,16 +12,28 @@ struct EmptyListView: View {
     //MARK:- PROPERTIES
     
     @State private var isAnimated: Bool = false
+    let images: [String] = [
+        "illustration-no1",
+        "illustration-no2",
+        "illustration-no3"]
+    let tips : [String] = [
+        "Use your time wisely !",
+        "Slow and steady wins the race",
+        "Keep it short and sweet",
+        "put hard task first",
+        "Reward yourself after work",
+        "Collect tasks ahead time",
+        "Each night schedule for tommorow"]
     
     //MARK:- BODY
     var body: some View {
         ZStack {
             VStack {
-                Image("illustration-no1").resizable().scaledToFit()
+                Image("\(images.randomElement() ?? self.images[0])").resizable().scaledToFit()
                     .frame(minWidth: 256, idealWidth: 280, maxWidth: 360, minHeight: 256, idealHeight: 280, maxHeight: 360, alignment: .center)
                 .layoutPriority(1)
                 
-                Text("Use your time wisely !")
+                Text("\(tips.randomElement() ?? self.tips[0])")
                     .layoutPriority(0.5)
                     .font(.system(.headline))
             } //: VStack
