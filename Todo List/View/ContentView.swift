@@ -12,6 +12,7 @@ struct ContentView: View {
     //MARK:- Properties
     @State private var showingAddTodoView: Bool = false
     @State private var animationButton: Bool = false
+    @State private var showingSettingView: Bool = false
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @FetchRequest(entity: Todo.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Todo.name, ascending: true)]) var todos: FetchedResults<Todo>
@@ -33,13 +34,15 @@ struct ContentView: View {
                 .navigationBarTitle("Todo", displayMode: .inline)
                 .navigationBarItems(leading: EditButton(),trailing: Button(action: {
                     //Action
-                    self.showingAddTodoView.toggle()
+                    self.showingSettingView.toggle()
                 }, label: {
-                    Image(systemName: "plus")
-                }))//: Add Button
-                    .sheet(isPresented: $showingAddTodoView) {
-                        AddTodoView().environment(\.managedObjectContext, self.managedObjectContext)
-                }
+                    Image(systemName: "paintbrush")
+                        .imageScale(.large)
+                })//: Add Button
+                    .sheet(isPresented: $showingSettingView) {
+                        SettingView()
+                    }
+                )
                 
                 //MARK:- NO TODO ITEMS
                 if todos.count == 0 {

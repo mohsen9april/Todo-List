@@ -18,12 +18,12 @@ struct EmptyListView: View {
         "illustration-no3"]
     let tips : [String] = [
         "Use your time wisely !",
-        "Slow and steady wins the race",
-        "Keep it short and sweet",
-        "put hard task first",
-        "Reward yourself after work",
-        "Collect tasks ahead time",
-        "Each night schedule for tommorow"]
+        "Slow and steady wins the race.",
+        "Keep it short and sweet.",
+        "put hard task first.",
+        "Reward yourself after work.",
+        "Collect tasks ahead time.",
+        "Each night schedule for tomorrow."]
     
     //MARK:- BODY
     var body: some View {
