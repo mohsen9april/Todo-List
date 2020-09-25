@@ -16,7 +16,7 @@ struct AddTodoView: View {
     @State private var priority: String = "Normal"
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) private var managedObjectContext
-
+    
     @State private var errorShowing: Bool = false
     @State private var errorTitle: String = ""
     @State private var errorMessage: String = ""
@@ -28,8 +28,13 @@ struct AddTodoView: View {
         NavigationView{
             
             VStack{
-                Form{
+                VStack(alignment: .leading, spacing: 20){
                     TextField("Todo", text: $name)
+                        .padding()
+                        .background(Color(UIColor.tertiarySystemFill))
+                        .cornerRadius(9)
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        
                     Picker(selection: $priority, label: Text("Priority")) {
                         ForEach(priorities,id: \.self){
                             Text($0)
@@ -45,7 +50,7 @@ struct AddTodoView: View {
                             
                             do{
                                 try self.managedObjectContext.save()
-                                print("New todo: \(todo.name ?? ""), priority: \(todo.priority ?? "")")
+                                  //print("New todo: \(todo.name ?? ""), priority: \(todo.priority ?? "")")
                             }catch{
                                 print(error)
                             }
@@ -58,8 +63,16 @@ struct AddTodoView: View {
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Save")
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .padding()
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .background(Color.blue)
+                            .cornerRadius(9)
+                            .foregroundColor(Color.white)
                     }
-                }
+                }//: VStack
+                    .padding(.horizontal)
+                    .padding(.vertical, 30)
                 Spacer()
             }
             .navigationBarTitle("New Todo", displayMode: .inline)
@@ -69,12 +82,10 @@ struct AddTodoView: View {
             }, label: {
                 Image(systemName: "xmark")
             }))
-            
-            
+                
                 .alert(isPresented: $errorShowing) {
                     Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }
-            
         }
     }
 }
